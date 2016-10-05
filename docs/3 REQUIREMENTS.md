@@ -16,6 +16,8 @@ Twitter is a feed of 140 character messages.
 
 ## Technical Requirements API
 
+These system calls will be prefixed with `/api`
+
 ### Create user
 - POST /user
 
@@ -31,3 +33,4 @@ Twitter is a feed of 140 character messages.
 - DELETE /follow/{user}
 - POST /dmail/{user}
 - GET /feed
+- PUT /profile
