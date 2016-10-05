@@ -10,12 +10,12 @@
   },
   "autoload" : {
     "psr-4" : {
-      "Clone\\Twitter\\" : "src"
+      "Twitter\\" : "src"
     }
   },
   "autoload-dev" : {
     "psr-4" : {
-      "Clone\\Twitter\\Tests\\" : "tests"
+      "Twitter\\Tests\\" : "tests"
     }
   }
 }

@@ -24,7 +24,7 @@ These system calls will be prefixed with `/api`
 ### Authentication modifying routes
 
 - POST /login
-- GET /logout
+- POST /logout
 
 ### Secure Routes
 
