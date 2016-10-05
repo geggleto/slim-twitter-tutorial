@@ -3,19 +3,20 @@
  * Created by PhpStorm.
  * User: glenn
  * Date: 10/5/2016
- * Time: 7:00 PM
+ * Time: 7:20 PM
  */
 
-namespace Twitter\Core;
+namespace Twitter\Action;
 
 
 use Slim\Http\Request;
 use Slim\Http\Response;
 
-class NotYetImplementedAction
+class GetFeedAction implements ActionInterface
 {
+
     public function __invoke(Request $request, Response $response, array $args)
     {
-        return $response->withStatus(501)->write("Not Yet Implemented");
+        // TODO: Implement __invoke() method.
     }
 }
