@@ -16,18 +16,20 @@ use Twitter\Services\TweetService;
 
 class CreateTweet extends Action
 {
-    public function __invoke(Request $request, Response $response, array $args)
+    protected $tweetService;
+
+    public function __construct(TweetService $tweetService)
     {
-        $tweet = $this->makeTweet($request->getParsedBody());
-
-        $tweetService = new TweetService();
-        $tweetService->tweet($request->getAttribute('user'), $tweet);
-
-        return $response->withJson(['message' => "Operation Completed Successfully"]);
+        $this->tweetService = $tweetService;
     }
 
-    protected function makeTweet(array $data) {
-        return (new TweetModel())
-                    ->setData($data);
+    public function __invoke(Request $request, Response $response, array $args)
+    {
+        $tweet = (new TweetModel())
+                    ->setData($request->getParsedBody());
+
+        $this->tweetService->tweet($request->getAttribute('user'), $tweet);
+
+        return $response->withJson(['message' => "Operation Completed Successfully"]);
     }
 }

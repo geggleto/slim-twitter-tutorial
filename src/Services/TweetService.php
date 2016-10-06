@@ -11,17 +11,50 @@ namespace Twitter\Services;
 
 use Twitter\Model\TweetModel;
 use Twitter\Model\UserModel;
+use Twitter\Repository\TweetRepository;
 
 class TweetService
 {
+    /** @var FeedService  */
+    protected $feedService;
 
-    public function __construct()
+    /** @var TweetRepository */
+    protected $tweetRepository;
+
+
+    /**
+     * TweetService constructor.
+     *
+     * @param FeedService $feedService
+     * @param TweetRepository $tweetRepository
+     */
+    public function __construct(FeedService $feedService, TweetRepository $tweetRepository)
     {
-        //Needs access to user feeds
+        $this->feedService = $feedService;
+        $this->tweetRepository = $tweetRepository;
     }
 
+    /**
+     * @param UserModel $sourceUser
+     * @param TweetModel $message
+     */
     public function tweet(UserModel $sourceUser, TweetModel $message) {
+
+        $message = $this->persistTweet($message);
+
         $followers = $sourceUser->followers();
-        $message->addTo($followers);
+
+        foreach ($followers as $follower) {
+            $this->feedService->addToFeed($follower, $message);
+        }
+    }
+
+    /**
+     * @param TweetModel $model
+     *
+     * @return TweetModel
+     */
+    public function persistTweet(TweetModel $model) {
+        return $this->tweetRepository->saveTweet($model);
     }
 }

@@ -24,4 +24,8 @@ class TweetRepository extends Repository
             return $tweet;
         }
     }
+
+    public function deleteTweet(TweetModel $tweet) {
+        return $this->remove($tweet->getId());
+    }
 }

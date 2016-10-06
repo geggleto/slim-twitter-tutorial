@@ -1,5 +1,7 @@
 <?php
 
+define("MYSQL_DATETIME_FORMAT", "Y-m-d H:i:s");
+
 // Register Twig View helper
 $container['view'] = function ($c) {
     $view = new \Slim\Views\Twig(__DIR__ ."/../templates", [

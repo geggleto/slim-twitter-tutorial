@@ -8,15 +8,6 @@
 
 namespace Twitter\Action;
 
-
-use Twitter\Model\AbstractGatewayFactory;
-
 abstract class Action implements ActionInterface
 {
-    protected $factory;
-
-    public function __construct(AbstractGatewayFactory $factory)
-    {
-        $this->factory = $factory;
-    }
 }

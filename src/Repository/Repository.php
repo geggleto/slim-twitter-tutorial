@@ -46,4 +46,12 @@ class Repository
         return $this->gateway->update($data, array('id' => $id));
     }
 
+    /**
+     * @param $id
+     * @return int
+     */
+    public function remove($id) {
+        return $this->gateway->delete(array('id' => $id));
+    }
+
 }
