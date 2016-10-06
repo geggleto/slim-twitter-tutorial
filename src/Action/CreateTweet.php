@@ -11,7 +11,8 @@ namespace Twitter\Action;
 
 use Slim\Http\Request;
 use Slim\Http\Response;
-use Twitter\Model\Model;
+use Twitter\Model\TweetModel;
+use Twitter\Model\UserModel;
 use Twitter\Services\TweetService;
 
 class CreateTweet extends Action
@@ -25,10 +26,13 @@ class CreateTweet extends Action
 
     public function __invoke(Request $request, Response $response, array $args)
     {
-        $tweet = (new Model())
+        $tweet = (new TweetModel())
                     ->setData($request->getParsedBody());
 
-        $this->tweetService->tweet($request->getAttribute('user'), $tweet);
+        /** @var $userModel UserModel */
+        $userModel = $request->getAttribute('user');
+
+        $this->tweetService->tweet($userModel, $tweet);
 
         return $response->withJson(['message' => "Operation Completed Successfully"]);
     }

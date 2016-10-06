@@ -10,6 +10,7 @@ namespace Twitter\Services;
 
 
 use Twitter\Model\Model;
+use Twitter\Model\TweetModel;
 use Twitter\Model\UserModel;
 use Twitter\Repository\TweetRepository;
 
@@ -38,23 +39,14 @@ class TweetService
      * @param UserModel $sourceUser
      * @param Model $message
      */
-    public function tweet(UserModel $sourceUser, Model $message) {
+    public function tweet(UserModel $sourceUser, TweetModel $message) {
 
-        $message = $this->persistTweet($message);
+        $message = $this->tweetRepository->save($message);
 
         $followers = $sourceUser->followers();
 
         foreach ($followers as $follower) {
             $this->feedService->addToFeed($follower, $message);
         }
-    }
-
-    /**
-     * @param Model $model
-     *
-     * @return Model
-     */
-    public function persistTweet(Model $model) {
-        return $this->tweetRepository->save($model);
     }
 }

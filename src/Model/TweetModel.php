@@ -8,7 +8,7 @@
 
 namespace Twitter\Model;
 
-class Model extends Model
+class TweetModel extends Model
 {
     protected $id;
     protected $owner_id;

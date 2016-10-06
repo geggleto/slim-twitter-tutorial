@@ -9,8 +9,13 @@
 namespace Twitter\Model;
 
 
-class UserModel
+class UserModel extends Model
 {
+    public function __construct()
+    {
+        parent::__construct(['id']);
+    }
+
     public function followers() {
         return array();
     }
