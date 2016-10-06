@@ -13,7 +13,7 @@ class UserModel extends Model
 {
     public function __construct()
     {
-        parent::__construct(['id']);
+        parent::__construct(['id', 'username', 'password', 'email', 'created']);
     }
 
     public function followers() {

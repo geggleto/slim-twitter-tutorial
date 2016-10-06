@@ -17,13 +17,27 @@ use Twitter\Services\TweetService;
 
 class CreateTweet extends Action
 {
+    /**
+     * @var TweetService
+     */
     protected $tweetService;
 
+    /**
+     * CreateTweet constructor.
+     * @param TweetService $tweetService
+     */
     public function __construct(TweetService $tweetService)
     {
         $this->tweetService = $tweetService;
     }
 
+    /**
+     * @param Request $request
+     * @param Response $response
+     * @param array $args
+     *
+     * @return Response
+     */
     public function __invoke(Request $request, Response $response, array $args)
     {
         $tweet = (new TweetModel())

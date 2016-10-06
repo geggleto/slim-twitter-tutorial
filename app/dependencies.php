@@ -15,8 +15,12 @@ $container['adapter'] = function ($c) {
     ));
 };
 
-$container['tweetGateway'] = function ($c) {
-    return new Zend\Db\TableGateway\TableGateway('tweet', $c['adapter']);
+$container['tweetGateway'] = function ($c) { // $c is the container
+    return new Zend\Db\TableGateway\TableGateway('tweets', $c['adapter']);
+};
+
+$container['feedGateway'] = function ($c) {
+    return new Zend\Db\TableGateway\TableGateway('feeds', $c['adapter']);
 };
 
 $container[\Twitter\Action\CreateTweet::class] = function ($c) {
@@ -29,10 +33,13 @@ $container[\Twitter\Services\TweetService::class] = function ($c) {
 };
 
 $container[\Twitter\Services\FeedService::class] = function ($c) {
-    return new \Twitter\Services\FeedService();
+    return new \Twitter\Services\FeedService($c[\Twitter\Repository\FeedRepository::class]);
 };
 
 $container[\Twitter\Repository\TweetRepository::class] = function ($c) {
     return new \Twitter\Repository\TweetRepository($c['tweetGateway']);
 };
 
+$container[\Twitter\Repository\FeedRepository::class] = function ($c) {
+    return new \Twitter\Repository\FeedRepository($c['feedGateway']);
+};
