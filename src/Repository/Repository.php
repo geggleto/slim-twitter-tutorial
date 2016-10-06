@@ -9,6 +9,7 @@
 namespace Twitter\Repository;
 
 
+use Twitter\Model\Model;
 use Zend\Db\TableGateway\TableGateway;
 
 class Repository
@@ -47,11 +48,26 @@ class Repository
     }
 
     /**
-     * @param $id
+     * @param Model $model
+     * @return Model
+     */
+    public function save(Model $model) {
+        if (empty($model->getId())) {
+            $id = $this->insert($model->toArray());
+            $model->setId($id);
+            return $model;
+        } else {
+            $this->update($model->getId(), $model->toArray());
+            return $model;
+        }
+    }
+
+    /**
+     * @param Model $model
      * @return int
      */
-    public function remove($id) {
-        return $this->gateway->delete(array('id' => $id));
+    public function remove(Model $model) {
+        return $this->gateway->delete(array('id' => $model->getId()));
     }
 
 }

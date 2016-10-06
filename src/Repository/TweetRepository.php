@@ -9,23 +9,9 @@
 namespace Twitter\Repository;
 
 
-use Twitter\Model\TweetModel;
-use Zend\Db\TableGateway\TableGateway;
+use Twitter\Model\Model;
 
 class TweetRepository extends Repository
 {
-    public function saveTweet(TweetModel $tweet) {
-        if (empty($tweet->getId())) {
-            $id = $this->insert($tweet->toArray());
-            $tweet->setId($id);
-            return $tweet;
-        } else {
-            $this->update($tweet->getId(), $tweet->toArray());
-            return $tweet;
-        }
-    }
 
-    public function deleteTweet(TweetModel $tweet) {
-        return $this->remove($tweet->getId());
-    }
 }

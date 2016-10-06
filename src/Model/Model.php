@@ -14,6 +14,8 @@ abstract class Model
 
     private $attributes;
 
+    protected $id;
+
     public function __construct(array $attributes)
     {
         $this->attributes = $attributes;
@@ -41,4 +43,22 @@ abstract class Model
 
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+
 }

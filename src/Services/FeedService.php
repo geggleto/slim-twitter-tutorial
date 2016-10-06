@@ -10,7 +10,7 @@ namespace Twitter\Services;
 
 
 use Twitter\Model\FeedModel;
-use Twitter\Model\TweetModel;
+use Twitter\Model\Model;
 use Twitter\Model\UserModel;
 use Twitter\Repository\FeedRepository;
 use Zend\Db\TableGateway\TableGateway;
@@ -26,17 +26,17 @@ class FeedService
 
     /**
      * @param UserModel $userModel
-     * @param TweetModel $model
+     * @param Model $model
      *
      * @return FeedModel
      */
-    public function addToFeed(UserModel $userModel, TweetModel $model) {
+    public function addToFeed(UserModel $userModel, Model $model) {
         $feed = new FeedModel();
         $feed->setUserId($userModel->getId());
         $feed->setTweetId($model->getId());
         $feed->setTimestamp(date(MYSQL_DATETIME_FORMAT));
 
-        return $this->feedRepository->saveFeedItem($feed);
+        return $this->feedRepository->save($feed);
     }
 
 

@@ -9,7 +9,7 @@
 namespace Twitter\Services;
 
 
-use Twitter\Model\TweetModel;
+use Twitter\Model\Model;
 use Twitter\Model\UserModel;
 use Twitter\Repository\TweetRepository;
 
@@ -36,9 +36,9 @@ class TweetService
 
     /**
      * @param UserModel $sourceUser
-     * @param TweetModel $message
+     * @param Model $message
      */
-    public function tweet(UserModel $sourceUser, TweetModel $message) {
+    public function tweet(UserModel $sourceUser, Model $message) {
 
         $message = $this->persistTweet($message);
 
@@ -50,11 +50,11 @@ class TweetService
     }
 
     /**
-     * @param TweetModel $model
+     * @param Model $model
      *
-     * @return TweetModel
+     * @return Model
      */
-    public function persistTweet(TweetModel $model) {
-        return $this->tweetRepository->saveTweet($model);
+    public function persistTweet(Model $model) {
+        return $this->tweetRepository->save($model);
     }
 }
