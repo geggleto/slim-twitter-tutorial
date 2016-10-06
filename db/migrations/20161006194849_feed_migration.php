@@ -25,12 +25,12 @@ class FeedMigration extends AbstractMigration
      * Remember to call "create()" or "update()" and NOT "save()" when working
      * with the Table class.
      */
-    public function change()
+    public function up()
     {
         $table = $this->table('feeds');
         $table->addColumn('owner_id', 'integer')
             ->addColumn('contents', 'string', array('limit' => 140))
-            ->addIndex(array('user_id'))
+            ->addIndex(array('owner_id'))
             ->save();
     }
 }
