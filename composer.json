@@ -18,5 +18,9 @@
     "psr-4" : {
       "Twitter\\Tests\\" : "tests"
     }
+  },
+  "scripts" : {
+    "migrate:dev:win" : "call vendor/bin/phinx migrate -e development",
+    "migrate:dev:nix" : "php vendor/bin/phinx migrate -e development"
   }
 }
