@@ -18,6 +18,8 @@ class AuthenticatedMiddleware implements MiddlewareInterface
     {
         //TODO Implement security
 
+        $request = $request->withAttribute('user', array());
+
         return $next($request, $response);
     }
 }

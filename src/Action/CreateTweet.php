@@ -11,12 +11,23 @@ namespace Twitter\Action;
 
 use Slim\Http\Request;
 use Slim\Http\Response;
+use Twitter\Model\TweetModel;
+use Twitter\Services\TweetService;
 
-class CreateTweet implements ActionInterface
+class CreateTweet extends Action
 {
-
     public function __invoke(Request $request, Response $response, array $args)
     {
-        // TODO: Implement __invoke() method.
+        $tweet = $this->makeTweet($request->getParsedBody());
+
+        $tweetService = new TweetService();
+        $tweetService->tweet($request->getAttribute('user'), $tweet);
+
+        return $response->withJson(['message' => "Operation Completed Successfully"]);
+    }
+
+    protected function makeTweet(array $data) {
+        return (new TweetModel())
+                    ->setData($data);
     }
 }

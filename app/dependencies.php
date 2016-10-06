@@ -15,22 +15,6 @@ $container['adapter'] = function ($c) {
     ));
 };
 
-$container['user'] = function ($c) {
-  return new Zend\Db\TableGateway\TableGateway("users", $c['adapter']);
-};
-
-$container['tweet'] = function ($c) {
-    return new Zend\Db\TableGateway\TableGateway("tweets", $c['adapter']);
-};
-
-$container['message'] = function ($c) {
-    return new Zend\Db\TableGateway\TableGateway("messages", $c['adapter']);
-};
-
-$container['follow'] = function ($c) {
-    return new Zend\Db\TableGateway\TableGateway("follows", $c['adapter']);
-};
-
-$container['feed'] = function ($c) {
-    return new Zend\Db\TableGateway\TableGateway("feeds", $c['adapter']);
+$container['ModelFactory'] = function ($c) {
+    return new \Twitter\Model\AbstractGatewayFactory($c['adapter']);
 };

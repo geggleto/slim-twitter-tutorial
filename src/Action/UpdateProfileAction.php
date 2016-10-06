@@ -12,7 +12,7 @@ namespace Twitter\Action;
 use Slim\Http\Request;
 use Slim\Http\Response;
 
-class UpdateProfileAction implements ActionInterface
+class UpdateProfileAction extends Action
 {
 
     public function __invoke(Request $request, Response $response, array $args)

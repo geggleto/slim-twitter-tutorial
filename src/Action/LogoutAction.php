@@ -12,7 +12,7 @@ namespace Twitter\Action;
 use Slim\Http\Request;
 use Slim\Http\Response;
 
-class LogoutAction implements ActionInterface
+class LogoutAction extends Action
 {
 
     public function __invoke(Request $request, Response $response, array $args)
