@@ -11,7 +11,7 @@ $app->group('/api', function() {
     $this->post('/login', \Twitter\Action\LoginUserAction::class);
 
     //Log User Out
-    $this->post('/logout', \Twitter\Core\NotYetImplementedAction::class);
+    $this->post('/logout', \Twitter\Action\LogoutAction::class);
 
     //Begin Secure Routes
     $this->group('', function () {
