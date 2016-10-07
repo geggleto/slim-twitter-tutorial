@@ -1,5 +1,18 @@
 <?php
 
+// Register Twig View helper
+$container['view'] = function ($c) {
+    $view = new \Slim\Views\Twig(__DIR__ ."/../templates", [
+        'cache' => __DIR__."/../cache"
+    ]);
+
+    // Instantiate and add Slim specific extension
+    $basePath = rtrim(str_ireplace('index.php', '', $c['request']->getUri()->getBasePath()), '/');
+    $view->addExtension(new Slim\Views\TwigExtension($c['router'], $basePath));
+
+    return $view;
+};
+
 $container['database'] = [
   "name" => "twitter",
   "username" => "root",
@@ -14,6 +27,9 @@ $container['adapter'] = function ($c) {
         'password' => $c['database']['password']
     ));
 };
+
+$container[\Twitter\Services\SessionService::class] =
+    (new \Twitter\Services\SessionService())->setName('twitter')->start();
 
 $container['tweetGateway'] = function ($c) { // $c is the container
     return new Zend\Db\TableGateway\TableGateway('tweets', $c['adapter']);
@@ -63,7 +79,8 @@ $container[\Twitter\Services\FeedService::class] = function ($c) {
 
 $container[\Twitter\Services\UserService::class] = function ($c) {
   return new \Twitter\Services\UserService($c[\Twitter\Repository\UserRepository::class],
-      $c[\Twitter\Repository\FollowerRepository::class]);
+      $c[\Twitter\Repository\FollowerRepository::class],
+      $c[\Twitter\Services\SessionService::class]);
 };
 
 $container[\Twitter\Action\CreateUserAction::class] = function ($c) {

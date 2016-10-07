@@ -14,6 +14,7 @@ use Zend\Db\Sql\Where;
 
 class UserRepository extends Repository
 {
+
     /**
      * @param $username
      *

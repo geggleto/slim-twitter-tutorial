@@ -11,12 +11,15 @@ namespace Twitter\Action;
 
 use Slim\Http\Request;
 use Slim\Http\Response;
+use Twitter\Model\UserModel;
+use Twitter\Services\SessionService;
 use Twitter\Services\UserService;
 
 class LoginUserAction extends Action
 {
     /** @var UserService */
     protected $userService;
+
 
     /**
      * LoginUserAction constructor.
@@ -28,11 +31,11 @@ class LoginUserAction extends Action
         $this->userService = $userService;
     }
 
+
     public function __invoke(Request $request, Response $response, array $args)
     {
         $attributes = $request->getParsedBody();
         $result = $this->userService->checkUserAuth($attributes['username'], $attributes['password']);
-
         return $response->withJson(["result" => $result]);
     }
 }

@@ -21,16 +21,20 @@ class UserService
     /** @var FollowerRepository  */
     protected $followerRepository;
 
+    /** @var SessionService */
+    protected $sessionService;
+
     /**
      * UserService constructor.
      *
      * @param UserRepository $userRepository
      * @param FollowerRepository $followerRepository
      */
-    public function __construct(UserRepository $userRepository, FollowerRepository $followerRepository)
+    public function __construct(UserRepository $userRepository, FollowerRepository $followerRepository, SessionService $sessionService)
     {
         $this->userRepository = $userRepository;
         $this->followerRepository = $followerRepository;
+        $this->sessionService = $sessionService;
     }
 
     /**
@@ -57,10 +61,20 @@ class UserService
         return $user;
     }
 
+    /**
+     * @param $username
+     * @param $password
+     * @return UserModel|bool
+     */
     public function checkUserAuth($username, $password) {
         $user = $this->userRepository->getUser($username);
         if ($user) {
-            return $user->checkPassword($password);
+            if ($user->checkPassword($password)) {
+                $this->sessionService->put('user', $user);
+                return true;
+            } else {
+                return false;
+            }
         } else {
             return false;
         }
