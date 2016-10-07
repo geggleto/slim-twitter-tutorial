@@ -14,7 +14,6 @@ use Twitter\Model\Model;
 use Twitter\Model\TweetModel;
 use Twitter\Model\UserModel;
 use Twitter\Repository\FeedRepository;
-use Zend\Db\TableGateway\TableGateway;
 
 class FeedService
 {
@@ -27,7 +26,7 @@ class FeedService
 
     /**
      * @param UserModel $userModel
-     * @param Model $model
+     * @param TweetModel $model
      *
      * @return FeedModel
      */

@@ -16,7 +16,7 @@ $app->group('/api', function() {
     //Begin Secure Routes
     $this->group('', function () {
         //Create Tweet
-        $this->post('/tweet', \Twitter\Core\NotYetImplementedAction::class);
+        $this->post('/tweet', \Twitter\Action\CreateTweet::class);
 
         //Delete Tweet
         $this->delete('/tweet/{tweet}', \Twitter\Core\NotYetImplementedAction::class);
@@ -31,6 +31,6 @@ $app->group('/api', function() {
         $this->get('/feed', \Twitter\Core\NotYetImplementedAction::class);
 
         //Update Your Profile
-        $this->put('/profile', \Twitter\Core\NotYetImplementedAction::class);
+        $this->put('/profile', \Twitter\Action\UpdateProfileAction::class);
     })->add(\Twitter\Middleware\AuthenticatedMiddleware::class); //Make sure we have an authenticated user
 });
