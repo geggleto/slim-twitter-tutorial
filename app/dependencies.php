@@ -31,6 +31,22 @@ $container['followerGateway'] = function ($c) {
     return new Zend\Db\TableGateway\TableGateway('followers', $c['adapter']);
 };
 
+$container[\Twitter\Repository\TweetRepository::class] = function ($c) {
+    return new \Twitter\Repository\TweetRepository($c['tweetGateway']);
+};
+
+$container[\Twitter\Repository\FeedRepository::class] = function ($c) {
+    return new \Twitter\Repository\FeedRepository($c['feedGateway']);
+};
+
+$container[\Twitter\Repository\UserRepository::class] = function ($c) {
+    return new \Twitter\Repository\UserRepository($c['userGateway']);
+};
+
+$container[\Twitter\Repository\FollowerRepository::class] = function ($c) {
+    return new \Twitter\Repository\FollowerRepository($c['followerGateway']);
+};
+
 $container[\Twitter\Action\CreateTweet::class] = function ($c) {
   return new \Twitter\Action\CreateTweet($c[\Twitter\Services\TweetService::class]);
 };
@@ -45,25 +61,9 @@ $container[\Twitter\Services\FeedService::class] = function ($c) {
     return new \Twitter\Services\FeedService($c[\Twitter\Repository\FeedRepository::class]);
 };
 
-$container[\Twitter\Repository\TweetRepository::class] = function ($c) {
-    return new \Twitter\Repository\TweetRepository($c['tweetGateway']);
-};
-
-$container[\Twitter\Repository\FeedRepository::class] = function ($c) {
-    return new \Twitter\Repository\FeedRepository($c['feedGateway']);
-};
-
-$container[\Twitter\Repository\UserRepository::class] = function ($c) {
-    return new \Twitter\Repository\UserRepository($c['userGateway']);
-};
-
 $container[\Twitter\Services\UserService::class] = function ($c) {
   return new \Twitter\Services\UserService($c[\Twitter\Repository\UserRepository::class],
       $c[\Twitter\Repository\FollowerRepository::class]);
-};
-
-$container[\Twitter\Repository\FollowerRepository::class] = function ($c) {
-  return new \Twitter\Repository\FollowerRepository($c['followerGateway']);
 };
 
 $container[\Twitter\Action\CreateUserAction::class] = function ($c) {
