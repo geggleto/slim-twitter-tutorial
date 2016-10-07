@@ -102,6 +102,8 @@ class UserModel extends Model
         $this->created = $created;
     }
 
-
+    public function checkPassword($password) {
+        return password_verify($password, $this->getPassword());
+    }
 
 }

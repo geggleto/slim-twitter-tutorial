@@ -69,3 +69,7 @@ $container[\Twitter\Repository\FollowerRepository::class] = function ($c) {
 $container[\Twitter\Action\CreateUserAction::class] = function ($c) {
     return new \Twitter\Action\CreateUserAction($c[\Twitter\Services\UserService::class]);
 };
+
+$container[\Twitter\Action\LoginUserAction::class] = function ($c) {
+    return new \Twitter\Action\LoginUserAction($c[\Twitter\Services\UserService::class]);
+};

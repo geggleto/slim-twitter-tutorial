@@ -51,8 +51,18 @@ class UserService
         $user = (new UserModel())
             ->setData($user);
         $user->setCreated(date(MYSQL_DATETIME_FORMAT));
+        $user->setPassword(password_hash($user->getPassword(), PASSWORD_DEFAULT));
         $user = $this->userRepository->save($user);
 
         return $user;
+    }
+
+    public function checkUserAuth($username, $password) {
+        $user = $this->userRepository->getUser($username);
+        if ($user) {
+            return $user->checkPassword($password);
+        } else {
+            return false;
+        }
     }
 }

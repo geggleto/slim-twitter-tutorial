@@ -8,7 +8,7 @@ $app->group('/api', function() {
     $this->post('/user', \Twitter\Action\CreateUserAction::class);
 
     //Log User In
-    $this->post('/login', \Twitter\Core\NotYetImplementedAction::class);
+    $this->post('/login', \Twitter\Action\LoginUserAction::class);
 
     //Log User Out
     $this->post('/logout', \Twitter\Core\NotYetImplementedAction::class);
