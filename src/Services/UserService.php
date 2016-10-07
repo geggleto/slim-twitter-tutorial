@@ -50,6 +50,7 @@ class UserService
     public function createUser(array $user) {
         $user = (new UserModel())
             ->setData($user);
+        $user->setCreated(date(MYSQL_DATETIME_FORMAT));
         $user = $this->userRepository->save($user);
 
         return $user;

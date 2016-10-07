@@ -8,7 +8,6 @@
 
 namespace Twitter\Action;
 
-
 use Slim\Http\Request;
 use Slim\Http\Response;
 use Twitter\Services\UserService;
@@ -25,7 +24,13 @@ class CreateUserAction extends Action
     public function __invoke(Request $request, Response $response, array $args)
     {
         $attributes = $request->getParsedBody();
-        $user = $this->userService->createUser($attributes);
+
+        try {
+            $user = $this->userService->createUser($attributes);
+        } catch (\Exception $exception) {
+            return $response->withJson(["error" => "An error occured"], 400);
+        }
+
         return $response->withJson($user->toArray());
     }
 }
