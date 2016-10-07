@@ -9,6 +9,7 @@
 namespace Twitter\Services;
 
 
+use Twitter\Model\UserModel;
 use Twitter\Repository\FollowerRepository;
 use Twitter\Repository\UserRepository;
 
@@ -39,5 +40,18 @@ class UserService
      */
     public function getFollowees($person_id) {
         return $this->followerRepository->getFollowees($person_id); //TODO Collectionize it
+    }
+
+    /**
+     * @param array $user
+     *
+     * @return \Twitter\Model\Model
+     */
+    public function createUser(array $user) {
+        $user = (new UserModel())
+            ->setData($user);
+        $user = $this->userRepository->save($user);
+
+        return $user;
     }
 }

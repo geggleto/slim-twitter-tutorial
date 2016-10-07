@@ -65,3 +65,7 @@ $container[\Twitter\Services\UserService::class] = function ($c) {
 $container[\Twitter\Repository\FollowerRepository::class] = function ($c) {
   return new \Twitter\Repository\FollowerRepository($c['followerGateway']);
 };
+
+$container[\Twitter\Action\CreateUserAction::class] = function ($c) {
+    return new \Twitter\Action\CreateUserAction($c[\Twitter\Services\UserService::class]);
+};

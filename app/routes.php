@@ -5,7 +5,7 @@
 
 $app->group('/api', function() {
     //Create User
-    $this->post('/user', \Twitter\Core\NotYetImplementedAction::class);
+    $this->post('/user', \Twitter\Action\CreateUserAction::class);
 
     //Log User In
     $this->post('/login', \Twitter\Core\NotYetImplementedAction::class);
