@@ -22,28 +22,32 @@ class TweetService
     /** @var TweetRepository */
     protected $tweetRepository;
 
+    /** @var UserService */
+    protected $userService;
 
     /**
      * TweetService constructor.
      *
      * @param FeedService $feedService
      * @param TweetRepository $tweetRepository
+     * @param UserService $userService
      */
-    public function __construct(FeedService $feedService, TweetRepository $tweetRepository)
+    public function __construct(FeedService $feedService, TweetRepository $tweetRepository, UserService $userService)
     {
         $this->feedService = $feedService;
         $this->tweetRepository = $tweetRepository;
+        $this->userService = $userService;
     }
 
     /**
      * @param UserModel $sourceUser
-     * @param Model $message
+     * @param TweetModel $message
      */
     public function tweet(UserModel $sourceUser, TweetModel $message) {
 
         $message = $this->tweetRepository->save($message);
 
-        $followers = $sourceUser->followers();
+        $followers = $this->userService->getFollowees($sourceUser->getId());
 
         foreach ($followers as $follower) {
             $this->feedService->addToFeed($follower, $message);

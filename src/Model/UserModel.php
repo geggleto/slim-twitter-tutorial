@@ -16,7 +16,4 @@ class UserModel extends Model
         parent::__construct(['id', 'username', 'password', 'email', 'created']);
     }
 
-    public function followers() {
-        return array();
-    }
 }
