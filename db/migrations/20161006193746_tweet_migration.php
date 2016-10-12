@@ -7,9 +7,10 @@ class TweetMigration extends AbstractMigration
     public function up()
     {
         $table = $this->table('tweets');
-        $table->addColumn('owner_id', 'integer')
+        $table->addColumn('user_id', 'integer')
             ->addColumn('contents', 'string', array('limit' => 140))
-            ->addIndex(array('owner_id'))
+            ->addColumn('state', 'integer')
+            ->addIndex(array('user_id'))
             ->save();
     }
 }

@@ -7,10 +7,10 @@ class FollowerMigration extends AbstractMigration
     public function up()
     {
         $table = $this->table('followers');
-        $table->addColumn('person_id', 'integer')
-            ->addColumn('follower_id', 'integer')
-            ->addIndex(array('person_id'))
-            ->addIndex(array('follower_id'))
+        $table->addColumn('user_id', 'integer')
+            ->addColumn('follows_user_id', 'integer')
+            ->addIndex(array('user_id'))
+            ->addIndex(array('follows_user_id'))
             ->save();
     }
 }
